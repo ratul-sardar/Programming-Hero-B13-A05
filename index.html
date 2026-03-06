@@ -6,7 +6,7 @@
 
     <!-- css and js -->
     <link rel="stylesheet" href="./style/main.css" />
-    <script src="./js/main.js" defer></script>
+    <script src="./js/login.js" defer></script>
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -79,13 +79,12 @@
             />
             <p class="text-sm text-primary">Default: admin123</p>
           </div>
-
-          <input
-            type="submit"
-            value="Sign In"
-            class="btn btn-primary font-semibold w-full mt-2"
-          />
         </form>
+
+        <!-- Submit Button -->
+        <button class="btn btn-primary font-semibold w-full" onclick="login()">
+          Sign In
+        </button>
 
         <!-- Info Area -->
         <p class="text-center">OR</p>
