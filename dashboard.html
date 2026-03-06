@@ -39,9 +39,136 @@
     <title>GitHub Issue Tracker</title>
   </head>
 
-  <!-- Login Card -->
+  <body class="bg-[#F8FAFC] w-full min-h-screen">
+    <nav
+      class="bg-white w-full py-4 px-6 md:px-8 lg:px-20 flex flex-col gap-4 md:flex-row md:justify-between items-center"
+    >
+      <!-- GitHub Logo and title -->
+      <div class="flex gap-4 items-center">
+        <img src="./assets/github-logo.png" alt="github-logo" width="36px" />
+        <h2 class="text-2xl font-semibold">GitHub Issues Tracker</h2>
+      </div>
 
-  <body class="">
-    Hi
+      <!-- Search Box -->
+      <div class="flex items-center gap-4">
+        <input
+          type="text"
+          placeholder="Search Issues..."
+          class="p-2 border-gray-200 rounded-sm w-44 md:w-70"
+        />
+        <button class="btn btn-primary rounded-sm">Search</button>
+      </div>
+    </nav>
+
+    <main class="mt-8 md:mt-10 lg:mt-15 px-6 md:px-8 lg:px-20">
+      <!-- Section tag -->
+      <section class="container mx-auto space-y-4">
+        <!-- Buttons Area -->
+        <div class="bg-white rounded-lg p-6 w-full shadow-sm">
+          <div class="flex gap-3 flex-wrap">
+            <button class="px-12 py-3 btn btn-primary">All</button>
+            <button
+              class="px-12 py-3 border-gray-400 text-[#64748B] btn btn-outline"
+            >
+              Open
+            </button>
+            <button
+              class="px-12 py-3 border-gray-400 text-[#64748B] btn btn-outline"
+            >
+              Closed
+            </button>
+          </div>
+        </div>
+
+        <!-- Content Area -->
+        <div class="overflow-hidden rounded-lg shadow-sm">
+          <!-- Top Part -->
+          <div
+            class="flex flex-col gap-5 md:flex-row md:justify-between bg-white border-b border-b-gray-100 p-6 w-full"
+          >
+            <!-- Heading -->
+            <div class="flex gap-2">
+              <div class="p-2.5 h-fit rounded-full bg-primary/10">
+                <img
+                  src="./assets/Aperture.png"
+                  alt="Aperture image"
+                  width="27px"
+                />
+              </div>
+              <!-- Text -->
+              <div class="">
+                <h2 class="font-semibold text-xl">50 Issues</h2>
+                <p class="text-gray-500">
+                  Track and manage your project issues
+                </p>
+              </div>
+            </div>
+
+            <!-- Indicator -->
+            <div class="flex gap-4">
+              <!-- Open Indicator -->
+              <div class="flex gap-2 items-center">
+                <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+                <p class="">Open</p>
+              </div>
+
+              <!-- Closed Indicator -->
+              <div class="flex gap-2 items-center">
+                <div class="w-3 h-3 bg-[#A855F7] rounded-full"></div>
+                <p class="">Closed</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Main Content Part -->
+          <div
+            class="p-6 bg-[#FBFBFB] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+          >
+            <!-- Card -->
+            <div
+              class="bg-white shadow-sm rounded-sm border-t-3 border-green-500"
+            >
+              <!-- Card Body -->
+              <div class="p-4 space-y-3">
+                <!-- Card Top Part -->
+                <div class="flex justify-between items-center">
+                  <img src="./assets/Open-Status.png" alt="Open-Status" />
+
+                  <div class="badge badge-soft badge-secondary">Hard</div>
+                </div>
+                <!-- Card Content -->
+                <div class="space-y-3">
+                  <!-- Text -->
+                  <div class="text-left space-y-2">
+                    <h4 class="font-semibold">
+                      Fix navigation menu on mobile devices
+                    </h4>
+                    <p class="text-gray-400 line-clamp-2">
+                      The navigation menu doesn't collapse properly on mobile
+                      devices. Need to fix the responsive behavior.
+                    </p>
+                  </div>
+
+                  <!-- Info Badge -->
+                  <div class="space-x-1">
+                    <div class="badge badge-soft badge-secondary">Bug</div>
+                    <div class="badge badge-soft badge-warning">
+                      help wanted
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- More Card Info -->
+              <div class="p-4 border-t border-gray-300 space-y-2">
+                <p class="text-gray-400 text-xs">#1 by john_doe</p>
+
+                <p class="text-gray-400 text-xs">1/15/2024</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
   </body>
 </html>
