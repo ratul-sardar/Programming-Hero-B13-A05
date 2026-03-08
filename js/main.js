@@ -1,20 +1,44 @@
 const cardsArea = document.getElementById("cardsArea");
+let currentButton = "all";
+const statusButtons = document.querySelectorAll("section .btn");
 
-console.log("HI");
+statusButtons.forEach((item) => {
+  item.addEventListener("click", () => {
+    //changing the current button status
+    currentButton = item.innerText.toLowerCase();
+    console.log(currentButton);
 
-async function allData(params) {
+    changeBtnStyle(item);
+  });
+});
+
+// This function contains the code for changing the btn style
+function changeBtnStyle(active) {
+  statusButtons.forEach((item) => {
+    item.classList =
+      "px-12 py-3 border-gray-400 text-[#64748B] btn btn-outline";
+  });
+
+  active.classList = "px-12 py-3 btn btn-primary";
+}
+
+// This Function
+async function allData() {
   let url = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
 
   let res = await fetch(url);
   let data = await res.json();
   let finalData = data.data;
 
-  finalData.forEach((item) => {
-    let card = document.createElement("div");
-    card.classList =
-      "bg-white shadow-sm rounded-sm border-t-3 border-green-500";
+  finalData.forEach(createCard);
+}
 
-    card.innerHTML = `
+// This Function Creates Cards.
+function createCard() {
+  let card = document.createElement("div");
+  card.classList = "bg-white shadow-sm rounded-sm border-t-3 border-green-500";
+
+  card.innerHTML = `
         <!-- Card Body -->
               <div class="p-4 space-y-3">
                 <!-- Card Top Part -->
@@ -54,8 +78,7 @@ async function allData(params) {
               </div>
     `;
 
-    cardsArea.appendChild(card);
-  });
+  cardsArea.appendChild(card);
 }
 
 allData();
