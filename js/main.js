@@ -2,6 +2,7 @@ const cardsArea = document.getElementById("cardsArea");
 let currentButton = "all";
 const statusButtons = document.querySelectorAll("section .btn");
 
+// EventListner on Buttons
 statusButtons.forEach((item) => {
   item.addEventListener("click", () => {
     //changing the current button status
@@ -9,6 +10,8 @@ statusButtons.forEach((item) => {
     console.log(currentButton);
 
     changeBtnStyle(item);
+
+    allData();
   });
 });
 
@@ -30,11 +33,22 @@ async function allData() {
   let data = await res.json();
   let finalData = data.data;
 
-  finalData.forEach(createCard);
-}
+  let openData = finalData.filter((item) => item.status === "open");
+  let closeData = finalData.filter((item) => item.status === "closed");
 
+  cardsArea.innerHTML = "";
+
+  if (currentButton === "all") {
+    finalData.forEach((item) => createCard(item));
+  } else if (currentButton === "open") {
+    openData.forEach((item) => createCard(item));
+  } else if (currentButton === "closed") {
+    closeData.forEach((item) => createCard(item));
+  }
+}
 // This Function Creates Cards.
-function createCard() {
+function createCard(data) {
+  console.log(data);
   let card = document.createElement("div");
   card.classList = "bg-white shadow-sm rounded-sm border-t-3 border-green-500";
 
@@ -45,18 +59,17 @@ function createCard() {
                 <div class="flex justify-between items-center">
                   <img src="./assets/Open-Status.png" alt="Open-Status" />
 
-                  <div class="badge badge-soft badge-secondary">Hard</div>
+                  <div class="badge badge-soft ${data.priority === "medium" ? "badge-warning" : data.priority === "high" ? "badge-secondary" : ""}">${data.priority}</div>
                 </div>
                 <!-- Card Content -->
                 <div class="space-y-3">
                   <!-- Text -->
                   <div class="text-left space-y-2">
-                    <h4 class="font-semibold">
-                      Fix navigation menu on mobile devices
+                    <h4 class="font-semibold line-clamp-2">
+                      ${data.title}
                     </h4>
                     <p class="text-gray-400 line-clamp-2">
-                      The navigation menu doesn't collapse properly on mobile
-                      devices. Need to fix the responsive behavior.
+                      ${data.description}
                     </p>
                   </div>
 
