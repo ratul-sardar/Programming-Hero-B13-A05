@@ -1,4 +1,5 @@
 const cardsArea = document.getElementById("cardsArea");
+const loading = document.getElementById("loading");
 let currentButton = "all";
 const statusButtons = document.querySelectorAll("section .btn");
 
@@ -15,6 +16,18 @@ statusButtons.forEach((item) => {
   });
 });
 
+// This function will show the loading animation
+function showLoading() {
+  loading.classList.add("flex");
+  loading.classList.remove("hidden");
+}
+
+// This function will hide the loading animation
+function hideLoading() {
+  loading.classList.add("hidden");
+  loading.classList.remove("flex");
+}
+
 // This function contains the code for changing the btn style
 function changeBtnStyle(active) {
   statusButtons.forEach((item) => {
@@ -29,9 +42,13 @@ function changeBtnStyle(active) {
 async function allData() {
   let url = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
 
+  showLoading();
+
   let res = await fetch(url);
   let data = await res.json();
   let finalData = data.data;
+
+  hideLoading();
 
   let openData = finalData.filter((item) => item.status === "open");
   let closeData = finalData.filter((item) => item.status === "closed");
@@ -75,9 +92,9 @@ function createCard(data) {
 
                   <!-- Info Badge -->
                   <div class="space-x-1">
-                    <div class="badge badge-soft badge-secondary">Bug</div>
+                    <div class="badge badge-soft badge-secondary">${data.labels[0]}</div>
                     <div class="badge badge-soft badge-warning">
-                      help wanted
+                      ${data.labels[1] ?? ""}
                     </div>
                   </div>
                 </div>
