@@ -7,6 +7,7 @@
     <!-- css and js -->
     <link rel="stylesheet" href="./style/main.css" />
     <script src="./js/main.js" defer></script>
+    <script src="./js/search.js" defer></script>
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -52,11 +53,12 @@
       <!-- Search Box -->
       <div class="flex items-center gap-4">
         <input
+          id="searchInput"
           type="text"
           placeholder="Search Issues..."
           class="p-2 border-gray-200 rounded-sm w-44 md:w-70"
         />
-        <button class="btn btn-primary rounded-sm">Search</button>
+        <button id="searchButton" class="btn btn-primary rounded-sm">Search</button>
       </div>
     </nav>
 

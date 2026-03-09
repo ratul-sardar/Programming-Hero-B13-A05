@@ -17,6 +17,8 @@ statusButtons.forEach((item) => {
     changeBtnStyle(item);
 
     allData();
+
+    searchBox.value = "";
   });
 });
 
@@ -39,10 +41,12 @@ function changeBtnStyle(active) {
       "px-12 py-3 border-gray-400 text-[#64748B] btn btn-outline";
   });
 
-  active.classList = "px-12 py-3 btn btn-primary";
+  if (active) {
+    active.classList = "px-12 py-3 btn btn-primary";
+  }
 }
 
-// This Function
+// This Function fetch all the data and uses the make card function
 async function allData() {
   let url = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
 
