@@ -114,7 +114,7 @@ function createCard(data) {
                   <!-- Info Badge -->
                   <div class="space-x-1">
                     <div class="badge badge-soft badge-secondary">${data.labels[0]}</div>
-                    <div class="badge badge-soft badge-warning">
+                    <div class=${data.labels[1] ? "badge badge-soft badge-warning" : ""}>
                       ${data.labels[1] ?? ""}
                     </div>
                   </div>
@@ -160,9 +160,9 @@ async function showModal(id) {
                   <div class="badge badge-soft badge-secondary">
                     ${data.labels[0]}
                   </div>
-                  <div class="badge badge-soft badge-warning">
-                    ${data.labels[1] ?? ""}
-                  </div>
+                  <div class=${data.labels[1] ? "badge badge-soft badge-warning" : ""}>
+                      ${data.labels[1] ?? ""}
+                    </div>
                 </div>
 
                 <!-- Description -->
