@@ -148,7 +148,7 @@ async function showModal(id) {
                   <div class="px-3 py-1 rounded-full text-white ${data.status === "open" ? "bg-green-600" : "bg-[#a855f7]"} ">
                     ${data.status}
                   </div>
-                  <p class="text-gray-500 text-xm">• Opened by ${data.assignee}</p>
+                  <p class="text-gray-500 text-xm">• Opened by ${data.assignee ? data.assignee : "none yet"}</p>
                   <p class="text-gray-500 text-xm">• ${data.updatedAt}</p>
                 </div>
 
@@ -170,7 +170,7 @@ async function showModal(id) {
                   <!-- Assignee info -->
                   <div class="">
                     <p class="text-gray-500">Assignee</p>
-                    <p class="font-semibold">${data.assignee}</p>
+                    <p class="font-semibold">${data.assignee ? data.assignee : "none yet"}</p>
                   </div>
 
                   <!-- Priority Info -->
