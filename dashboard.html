@@ -130,29 +130,53 @@
 
           <!-- Modal -->
           <!-- Open the modal using ID.showModal() method -->
-          <button class="btn" onclick="singleDetails.showModal()">
-            open modal
-          </button>
+
           <dialog id="singleDetails" class="modal modal-bottom sm:modal-middle">
             <div class="modal-box">
-              <div class="">
-                <h3 id="modalHeading" class="text-lg font-bold">Hello!</h3>
+              <div class="space-y-2">
+                <!-- Heading -->
+                <h3 id="modalHeading" class="text-lg font-bold">
+                  Hello Title!
+                </h3>
 
-                <div class="flex"></div>
+                <!-- status and info -->
+                <div class="flex items-center gap-1">
+                  <div class="px-3 py-1 rounded-full text-white bg-green-600">
+                    Open
+                  </div>
+                  <p class="text-gray-500 text-xm">• Opened by Akuli!</p>
+                  <p class="text-gray-500 text-xm">• 11/11/26</p>
+                </div>
+
+                <div class="space-x-1">
+                  <div class="badge badge-soft badge-secondary">
+                    ${data.labels[0]}
+                  </div>
+                  <div class="badge badge-soft badge-warning">
+                    ${data.labels[1] ?? ""}
+                  </div>
+                </div>
+
+                <!-- Description -->
+                <p class="text-gray-500">Description bla bla bla</p>
+
+                <!-- More Info -->
+                <div class="bg-gray-100 rounded-lg p-4 flex justify-between">
+
+                  <!-- Assignee info -->
+                  <div class="">
+                    <p class="text-gray-500">Assignee</p>
+                    <p class="font-semibold">Akuli</p>
+                  </div>
+
+                  <!-- Priority Info -->
+                  <div class="">
+                    <p class="text-gray-500">Priority:</p>
+                    <div class="badge badge-soft ${data.priority === "medium" ? "badge-warning" : data.priority === "high" ? "badge-secondary" : ""}">${data.priority}</div>
+                  </div>
+                </div>
               </div>
 
-              <div class="space-x-1">
-                <div class="badge badge-soft badge-secondary">
-                  ${data.labels[0]}
-                </div>
-                <div class="badge badge-soft badge-warning">
-                  ${data.labels[1] ?? ""}
-                </div>
-              </div>
-
-              <p class="py-4">
-                Press ESC key or click the button below to close
-              </p>
               <div class="modal-action">
                 <form method="dialog">
                   <!-- if there is a button in form, it will close the modal -->

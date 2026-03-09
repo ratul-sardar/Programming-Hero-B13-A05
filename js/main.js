@@ -8,7 +8,7 @@ const modalDetails = document.querySelector("#singleDetails .modal-box");
 let currentButton = "all";
 const statusButtons = document.querySelectorAll("section .butam");
 
-// EventListner on Buttons
+// EventListner on Toggle Buttons
 statusButtons.forEach((item) => {
   item.addEventListener("click", () => {
     //changing the current button status
@@ -17,8 +17,6 @@ statusButtons.forEach((item) => {
     changeBtnStyle(item);
 
     allData();
-
-    showModal();
   });
 });
 
@@ -82,6 +80,8 @@ function createCard(data) {
   let card = document.createElement("div");
   card.classList = `bg-white shadow-sm rounded-sm border-t-3 ${data.status === "open" ? "border-green-500" : "border-[#a855f7]"} `;
 
+  card.onclick = () => showModal(data.id);
+
   card.innerHTML = `
         <!-- Card Body -->
               <div class="p-4 space-y-3">
@@ -130,25 +130,64 @@ function createCard(data) {
 
 // This functions will show the modal
 async function showModal(id) {
-  url = `https://phi-lab-server.vercel.app/api/v1/lab/issue/1`;
+  url = `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`;
 
   const res = await fetch(url);
-  const data = await res.json();
-  console.log(data.data);
+  const raw = await res.json();
+  const data = raw.data;
 
-  // modalDetails.innerHTML = `
-  //   <h3 id="modalHeading" class="text-lg font-bold">Hello!</h3>
+  modalDetails.innerHTML = `
+    <div class="space-y-4">
+                <!-- Heading -->
+                <h3 id="modalHeading" class="text-lg font-bold">
+                  ${data.title}
+                </h3>
 
-  //             <p class="py-4">
-  //               Press ESC key or click the button below to close
-  //             </p>
-  //             <div class="modal-action">
-  //               <form method="dialog">
-  //                 <!-- if there is a button in form, it will close the modal -->
-  //                 <button class="btn btn-primary">Close</button>
-  //               </form>
-  //             </div>
-  // `;
+                <!-- status and info -->
+                <div class="flex items-center gap-3">
+                  <div class="px-3 py-1 rounded-full text-white ${data.status === "open" ? "bg-green-600" : "bg-[#a855f7]"} ">
+                    ${data.status}
+                  </div>
+                  <p class="text-gray-500 text-xm">• Opened by ${data.assignee}</p>
+                  <p class="text-gray-500 text-xm">• ${data.updatedAt}</p>
+                </div>
+
+                <div class="space-x-1">
+                  <div class="badge badge-soft badge-secondary">
+                    ${data.labels[0]}
+                  </div>
+                  <div class="badge badge-soft badge-warning">
+                    ${data.labels[1] ?? ""}
+                  </div>
+                </div>
+
+                <!-- Description -->
+                <p class="text-gray-500">${data.description}</p>
+
+                <!-- More Info -->
+                <div class="bg-gray-100 rounded-lg p-4 flex justify-between">
+
+                  <!-- Assignee info -->
+                  <div class="">
+                    <p class="text-gray-500">Assignee</p>
+                    <p class="font-semibold">${data.assignee}</p>
+                  </div>
+
+                  <!-- Priority Info -->
+                  <div class="">
+                    <p class="text-gray-500">Priority:</p>
+                    <div class="badge badge-soft ${data.priority === "medium" ? "badge-warning" : data.priority === "high" ? "badge-secondary" : ""}">${data.priority}</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="modal-action">
+                <form method="dialog">
+                  <!-- if there is a button in form, it will close the modal -->
+                  <button class="btn btn-primary">Close</button>
+                </form>
+              </div>
+  `;
 
   modalTrigger.showModal();
 }
