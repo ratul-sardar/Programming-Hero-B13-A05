@@ -1,18 +1,24 @@
 const cardsArea = document.getElementById("cardsArea");
 const loading = document.getElementById("loading");
+const totalCount = document.getElementById("totalCount");
+
+const modalTrigger = document.getElementById("singleDetails");
+const modalDetails = document.querySelector("#singleDetails .modal-box");
+
 let currentButton = "all";
-const statusButtons = document.querySelectorAll("section .btn");
+const statusButtons = document.querySelectorAll("section .butam");
 
 // EventListner on Buttons
 statusButtons.forEach((item) => {
   item.addEventListener("click", () => {
     //changing the current button status
     currentButton = item.innerText.toLowerCase();
-    console.log(currentButton);
 
     changeBtnStyle(item);
 
     allData();
+
+    showModal();
   });
 });
 
@@ -50,31 +56,42 @@ async function allData() {
 
   hideLoading();
 
+  // Open status Data
   let openData = finalData.filter((item) => item.status === "open");
+
+  // Closed status Data
   let closeData = finalData.filter((item) => item.status === "closed");
 
+  // Clearing the container before adding the cards
   cardsArea.innerHTML = "";
 
+  // Adding the cards based on which button is active
   if (currentButton === "all") {
     finalData.forEach((item) => createCard(item));
+    totalCount.innerHTML = `${finalData.length} Issues`;
   } else if (currentButton === "open") {
     openData.forEach((item) => createCard(item));
+    totalCount.innerHTML = `${openData.length} Issues`;
   } else if (currentButton === "closed") {
     closeData.forEach((item) => createCard(item));
+    totalCount.innerHTML = `${closeData.length} Issues`;
   }
 }
 // This Function Creates Cards.
 function createCard(data) {
-  console.log(data);
   let card = document.createElement("div");
-  card.classList = "bg-white shadow-sm rounded-sm border-t-3 border-green-500";
+  card.classList = `bg-white shadow-sm rounded-sm border-t-3 ${data.status === "open" ? "border-green-500" : "border-[#a855f7]"} `;
 
   card.innerHTML = `
         <!-- Card Body -->
               <div class="p-4 space-y-3">
                 <!-- Card Top Part -->
                 <div class="flex justify-between items-center">
-                  <img src="./assets/Open-Status.png" alt="Open-Status" />
+                  <img src=${
+                    data.status === "open"
+                      ? "./assets/Open-Status.png"
+                      : "./assets/Closed.png"
+                  }  alt="Status Image" />
 
                   <div class="badge badge-soft ${data.priority === "medium" ? "badge-warning" : data.priority === "high" ? "badge-secondary" : ""}">${data.priority}</div>
                 </div>
@@ -102,13 +119,38 @@ function createCard(data) {
 
               <!-- More Card Info -->
               <div class="p-4 border-t border-gray-300 space-y-2">
-                <p class="text-gray-400 text-xs">#1 by john_doe</p>
+                <p class="text-gray-400 text-xs">#${data.id} by ${data.author}</p>
 
-                <p class="text-gray-400 text-xs">1/15/2024</p>
+                <p class="text-gray-400 text-xs">${data.createdAt}</p>
               </div>
     `;
 
   cardsArea.appendChild(card);
+}
+
+// This functions will show the modal
+async function showModal(id) {
+  url = `https://phi-lab-server.vercel.app/api/v1/lab/issue/1`;
+
+  const res = await fetch(url);
+  const data = await res.json();
+  console.log(data.data);
+
+  // modalDetails.innerHTML = `
+  //   <h3 id="modalHeading" class="text-lg font-bold">Hello!</h3>
+
+  //             <p class="py-4">
+  //               Press ESC key or click the button below to close
+  //             </p>
+  //             <div class="modal-action">
+  //               <form method="dialog">
+  //                 <!-- if there is a button in form, it will close the modal -->
+  //                 <button class="btn btn-primary">Close</button>
+  //               </form>
+  //             </div>
+  // `;
+
+  modalTrigger.showModal();
 }
 
 allData();

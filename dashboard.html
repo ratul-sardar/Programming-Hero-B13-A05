@@ -66,14 +66,14 @@
         <!-- Buttons Area -->
         <div class="bg-white rounded-lg p-6 w-full shadow-sm">
           <div class="flex gap-3 flex-wrap">
-            <button class="px-12 py-3 btn btn-primary">All</button>
+            <button class="butam px-12 py-3 btn btn-primary">All</button>
             <button
-              class="px-12 py-3 border-gray-400 text-[#64748B] btn btn-outline"
+              class="butam px-12 py-3 border-gray-400 text-[#64748B] btn btn-outline"
             >
               Open
             </button>
             <button
-              class="px-12 py-3 border-gray-400 text-[#64748B] btn btn-outline"
+              class="butam px-12 py-3 border-gray-400 text-[#64748B] btn btn-outline"
             >
               Closed
             </button>
@@ -97,7 +97,7 @@
               </div>
               <!-- Text -->
               <div class="">
-                <h2 class="font-semibold text-xl">50 Issues</h2>
+                <h2 id="totalCount" class="font-semibold text-xl"></h2>
                 <p class="text-gray-500">
                   Track and manage your project issues
                 </p>
@@ -128,6 +128,41 @@
             <!-- Card -->
           </div>
 
+          <!-- Modal -->
+          <!-- Open the modal using ID.showModal() method -->
+          <button class="btn" onclick="singleDetails.showModal()">
+            open modal
+          </button>
+          <dialog id="singleDetails" class="modal modal-bottom sm:modal-middle">
+            <div class="modal-box">
+              <div class="">
+                <h3 id="modalHeading" class="text-lg font-bold">Hello!</h3>
+
+                <div class="flex"></div>
+              </div>
+
+              <div class="space-x-1">
+                <div class="badge badge-soft badge-secondary">
+                  ${data.labels[0]}
+                </div>
+                <div class="badge badge-soft badge-warning">
+                  ${data.labels[1] ?? ""}
+                </div>
+              </div>
+
+              <p class="py-4">
+                Press ESC key or click the button below to close
+              </p>
+              <div class="modal-action">
+                <form method="dialog">
+                  <!-- if there is a button in form, it will close the modal -->
+                  <button class="btn btn-primary">Close</button>
+                </form>
+              </div>
+            </div>
+          </dialog>
+
+          <!-- Loading animation -->
           <div
             id="loading"
             class="hidden p-6 bg-[#FBFBFB] w-full h-90vh justify-center items-center"
